@@ -38,11 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: selectedNavIndex == 0
-          ? const CustomersTab()
-          : SalesTab(
-            isInternalUser: isInternalUser,
-          ),
+      body: IndexedStack(
+        index: selectedNavIndex,
+        children: [
+          const CustomersTab(),
+          SalesTab(isInternalUser: isInternalUser),
+        ],
+      ),
     );
   }
 }
