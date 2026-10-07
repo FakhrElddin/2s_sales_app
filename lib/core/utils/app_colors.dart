@@ -9,4 +9,7 @@ class AppColors {
   static const Color greyColor = Colors.grey;
   static const Color transparentColor = Colors.transparent;
   static const Color redColor = Colors.red;
+  static const Color cardBorderColor = Color(0xFFEBEDFF);
+  static const Color containerBackgroundColor = Color(0xFFF3F2FF);
+  static const Color labelTextColor = Color(0xFF4C5E85);
 }
