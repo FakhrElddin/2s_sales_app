@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
-import 'package:twos_home_wear_app/core/utils/app_constants.dart';
+import 'package:twos_home_wear_app/core/utils/app_styles.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -56,19 +56,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       cursorColor: AppColors.primaryColor,
-      style: const TextStyle(
-        fontFamily: AppConstants.interFontFamily,
-        fontSize: 16,
-        color: AppColors.primaryColor,
-      ),
+      style: AppStyles.regular16Text,
       validator: widget.validator,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        hintStyle: const TextStyle(
-          fontFamily: AppConstants.interFontFamily,
-          fontSize: 16,
-          color: AppColors.greyColor,
-        ),
+        hintStyle: AppStyles.regular16Text.copyWith(color: AppColors.greyColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: AppColors.primaryColor.withAlpha(50)),
@@ -101,10 +93,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 16),
                   child: Icon(
-                    obscureText ? Icons.visibility_off : Icons.visibility,
+                    obscureText ? Icons.visibility : Icons.visibility_off,
                     color: obscureText
-                        ? AppColors.greyColor
-                        : AppColors.primaryColor,
+                        ? AppColors.primaryColor
+                        : AppColors.greyColor,
                   ),
                 ),
               )

@@ -1,3 +1,3 @@
 class AppConstants {
-  static const String appFontFamily = 'Inter';
+  static const String interFontFamily = 'Inter';
 }
