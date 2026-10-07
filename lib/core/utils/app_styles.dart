@@ -42,4 +42,9 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.textSecondaryColor,
   );
+  static const TextStyle semiBold12Text = TextStyle(
+    color: AppColors.textPrimaryColor,
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+  );
 }

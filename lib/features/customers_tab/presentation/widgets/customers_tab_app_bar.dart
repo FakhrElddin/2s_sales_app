@@ -3,8 +3,10 @@ import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/core/utils/app_images.dart';
 import 'package:twos_home_wear_app/core/utils/app_styles.dart';
 
-class CustomersTabAppBar extends StatelessWidget {
-  const CustomersTabAppBar({super.key});
+class CustomTabAppBar extends StatelessWidget {
+  const CustomTabAppBar({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class CustomersTabAppBar extends StatelessWidget {
         children: [
           Image.asset(AppImages.appLogoImage, height: 32, fit: BoxFit.contain),
           const SizedBox(width: 10),
-          const Text('Customers', style: AppStyles.bold22Text),
+          Text(title, style: AppStyles.bold22Text),
         ],
       ),
     );

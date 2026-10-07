@@ -59,7 +59,7 @@ class _CustomersTabState extends State<CustomersTab> {
     return SafeArea(
       child: Column(
         children: [
-          const CustomersTabAppBar(),
+          CustomTabAppBar(title: 'Customers'),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
