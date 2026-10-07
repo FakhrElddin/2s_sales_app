@@ -42,5 +42,5 @@ class NetworkError extends Failures {
 }
 
 class UnexpectedError extends Failures {
-  new({required super.errorMessage});
+  UnexpectedError({required super.errorMessage});
 }

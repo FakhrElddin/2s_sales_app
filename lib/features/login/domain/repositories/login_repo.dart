@@ -5,6 +5,6 @@ import 'package:twos_home_wear_app/features/login/domain/entities/login_entity.d
 abstract class LoginRepo {
   Future<Either<Failures, LoginEntity>> login({
     required String email,
-    required String passwrod,
+    required String password,
   });
 }
