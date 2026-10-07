@@ -4,4 +4,8 @@ import 'package:twos_home_wear_app/features/customers_tab/domain/entities/custom
 
 abstract class CustomersRepo {
   Future<Either<Failures, List<CustomerEntity>>> getCustomers({String? search});
+  Future<Either<Failures, bool>> updateCustomerPhone({
+    required String customerId,
+    required String phone,
+  });
 }
