@@ -20,4 +20,19 @@ class CustomersRepoImpl implements CustomersRepo {
       (customers) => Right(customers),
     );
   }
+
+  @override
+  Future<Either<Failures, bool>> updateCustomerPhone({
+    required String customerId,
+    required String phone,
+  }) async {
+    var either = await customersRemoteDataSoucre.updateCustomerPhone(
+      customerId: customerId,
+      phone: phone,
+    );
+    return either.fold(
+      (failure) => Left(failure),
+      (isUpdated) => Right(isUpdated),
+    );
+  }
 }

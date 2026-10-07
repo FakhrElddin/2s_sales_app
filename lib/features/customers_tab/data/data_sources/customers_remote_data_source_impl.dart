@@ -72,4 +72,59 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
       );
     }
   }
+
+  @override
+  Future<Either<Failures, bool>> updateCustomerPhone({
+    required String customerId,
+    required String phone,
+  }) async {
+    try {
+      var response = await apiManager.postData(
+        endPoint: EndPoints.getCustomersEndPoint,
+        data: {
+          'jsonrpc': '2.0',
+          'method': 'call',
+          'params': {
+            "model": "res.partner",
+            "method": "search_read",
+            "args": [
+              [
+                {
+                  {customerId},
+                },
+              ],
+              {"phone": phone},
+            ],
+            "kwargs": {},
+          },
+        },
+      );
+      if (response.data['result'] != null) {
+        final bool isUpdated = response.data['result'];
+        return Right(isUpdated);
+      } else if (response.data['error'] != null) {
+        return Left(
+          UnexpectedError(
+            errorMessage:
+                response.data['error']['message'] ??
+                'Failed to get customers, please try again',
+          ),
+        );
+      } else {
+        return Left(
+          UnexpectedError(
+            errorMessage: 'Failed to get customers, please try again',
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(ServerError.fromDioException(e));
+    } catch (e) {
+      return Left(
+        UnexpectedError(
+          errorMessage: 'Failed to get customers, please try again',
+        ),
+      );
+    }
+  }
 }
