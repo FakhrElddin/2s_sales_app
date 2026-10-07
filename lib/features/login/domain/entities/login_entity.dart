@@ -1,5 +1,5 @@
 class LoginEntity {
-  String? uid;
+  int? uid;
   String? name;
   String? email;
   bool? isInternalUser;
