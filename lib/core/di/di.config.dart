@@ -23,6 +23,8 @@ import '../../features/customers_tab/domain/repositories/customers_repo.dart'
     as _i1020;
 import '../../features/customers_tab/domain/use_cases/get_customers_use_case.dart'
     as _i10;
+import '../../features/customers_tab/domain/use_cases/update_customer_phone_use_case.dart'
+    as _i545;
 import '../../features/customers_tab/presentation/manager/customers_cubit/customers_cubit.dart'
     as _i227;
 import '../../features/login/data/data_sources/login_remote_data_source_impl.dart'
@@ -72,9 +74,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i10.GetCustomersUseCase>(
       () => _i10.GetCustomersUseCase(customersRepo: gh<_i1020.CustomersRepo>()),
     );
+    gh.factory<_i545.UpdateCustomerPhoneUseCase>(
+      () => _i545.UpdateCustomerPhoneUseCase(
+        customersRepo: gh<_i1020.CustomersRepo>(),
+      ),
+    );
     gh.factory<_i227.CustomersCubit>(
       () => _i227.CustomersCubit(
         getCustomersUseCase: gh<_i10.GetCustomersUseCase>(),
+        updateCustomerPhoneUseCase: gh<_i545.UpdateCustomerPhoneUseCase>(),
       ),
     );
     return this;

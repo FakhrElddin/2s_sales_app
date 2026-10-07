@@ -18,3 +18,16 @@ final class CustomersError extends CustomersState {
 
   CustomersError({required this.failure});
 }
+
+final class UpdateCustomerPhoneLoading extends CustomersState {}
+
+final class UpdateCustomerPhoneSuccess extends CustomersState {
+
+  UpdateCustomerPhoneSuccess();
+}
+
+final class UpdateCustomerPhoneError extends CustomersState {
+  final Failures failure;
+
+  UpdateCustomerPhoneError({required this.failure});
+}

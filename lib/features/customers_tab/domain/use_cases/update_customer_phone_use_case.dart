@@ -1,14 +1,16 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:twos_home_wear_app/core/errors/failures.dart';
 import 'package:twos_home_wear_app/features/customers_tab/domain/repositories/customers_repo.dart';
 
+@injectable
 class UpdateCustomerPhoneUseCase {
   final CustomersRepo customersRepo;
 
   UpdateCustomerPhoneUseCase({required this.customersRepo});
 
   Future<Either<Failures, bool>> call({
-    required String customerId,
+    required int customerId,
     required String phone,
   }) {
     return customersRepo.updateCustomerPhone(

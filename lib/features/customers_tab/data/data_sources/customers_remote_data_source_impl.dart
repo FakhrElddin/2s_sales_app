@@ -75,7 +75,7 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
 
   @override
   Future<Either<Failures, bool>> updateCustomerPhone({
-    required String customerId,
+    required int customerId,
     required String phone,
   }) async {
     try {
@@ -86,13 +86,9 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
           'method': 'call',
           'params': {
             "model": "res.partner",
-            "method": "search_read",
+            "method": "write",
             "args": [
-              [
-                {
-                  {customerId},
-                },
-              ],
+              [customerId],
               {"phone": phone},
             ],
             "kwargs": {},

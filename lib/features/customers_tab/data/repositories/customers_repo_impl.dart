@@ -23,7 +23,7 @@ class CustomersRepoImpl implements CustomersRepo {
 
   @override
   Future<Either<Failures, bool>> updateCustomerPhone({
-    required String customerId,
+    required int customerId,
     required String phone,
   }) async {
     var either = await customersRemoteDataSoucre.updateCustomerPhone(
