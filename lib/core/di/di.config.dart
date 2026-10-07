@@ -13,6 +13,18 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/customers_tab/data/data_sources/customers_remote_data_source_impl.dart'
+    as _i194;
+import '../../features/customers_tab/data/repositories/customers_repo_impl.dart'
+    as _i822;
+import '../../features/customers_tab/domain/data_sources/customers_remote_data_soucre.dart'
+    as _i128;
+import '../../features/customers_tab/domain/repositories/customers_repo.dart'
+    as _i1020;
+import '../../features/customers_tab/domain/use_cases/get_customers_use_case.dart'
+    as _i10;
+import '../../features/customers_tab/presentation/manager/customers_cubit/customers_cubit.dart'
+    as _i227;
 import '../../features/login/data/data_sources/login_remote_data_source_impl.dart'
     as _i321;
 import '../../features/login/data/repositories/login_repo_impl.dart' as _i546;
@@ -36,9 +48,19 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i321.LoginRemoteDataSourceImpl(apiManager: gh<_i1047.ApiManager>()),
     );
+    gh.factory<_i128.CustomersRemoteDataSoucre>(
+      () => _i194.CustomersRemoteDataSourceImpl(
+        apiManager: gh<_i1047.ApiManager>(),
+      ),
+    );
     gh.factory<_i1061.LoginRepo>(
       () => _i546.LoginRepoImpl(
         loginRemoteDataSource: gh<_i362.LoginRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i1020.CustomersRepo>(
+      () => _i822.CustomersRepoImpl(
+        customersRemoteDataSoucre: gh<_i128.CustomersRemoteDataSoucre>(),
       ),
     );
     gh.factory<_i191.LoginUseCase>(
@@ -46,6 +68,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i994.LoginCubit>(
       () => _i994.LoginCubit(loginUseCase: gh<_i191.LoginUseCase>()),
+    );
+    gh.factory<_i10.GetCustomersUseCase>(
+      () => _i10.GetCustomersUseCase(customersRepo: gh<_i1020.CustomersRepo>()),
+    );
+    gh.factory<_i227.CustomersCubit>(
+      () => _i227.CustomersCubit(
+        getCustomersUseCase: gh<_i10.GetCustomersUseCase>(),
+      ),
     );
     return this;
   }
