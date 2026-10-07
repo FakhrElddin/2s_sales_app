@@ -5,10 +5,7 @@ import 'package:twos_home_wear_app/features/sales_tab/presentation/screens/sales
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  final List<Widget> tabs = const [
-    CustomersTab(),
-    SalesTab(),
-  ];
+  final List<Widget> tabs = const [CustomersTab(), SalesTab()];
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

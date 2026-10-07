@@ -4,9 +4,7 @@ import 'package:twos_home_wear_app/core/utils/app_images.dart';
 import 'package:twos_home_wear_app/core/utils/app_styles.dart';
 
 class CustomersTabAppBar extends StatelessWidget {
-  const CustomersTabAppBar({super.key, this.onProfileTap});
-
-  final VoidCallback? onProfileTap;
+  const CustomersTabAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

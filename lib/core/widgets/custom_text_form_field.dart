@@ -58,6 +58,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       cursorColor: AppColors.primaryColor,
       style: AppStyles.regular16Text,
       validator: widget.validator,
+      onChanged: widget.onChanged,
+      onFieldSubmitted: widget.onSubmitted,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: AppStyles.regular16Text.copyWith(color: AppColors.greyColor),
