@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:twos_home_wear_app/core/errors/failures.dart';
 import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
@@ -6,6 +7,7 @@ import 'package:twos_home_wear_app/features/sales_tab/domain/use_cases/get_sales
 
 part 'sales_orders_state.dart';
 
+@injectable
 class SalesOrdersCubit extends Cubit<SalesOrdersState> {
   final GetSalesOrdersUseCase getSalesOrdersUseCase;
   SalesOrdersCubit({required this.getSalesOrdersUseCase})

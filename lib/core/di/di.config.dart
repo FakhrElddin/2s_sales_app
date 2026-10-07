@@ -46,6 +46,8 @@ import '../../features/sales_tab/domain/repositories/sales_orders_repo.dart'
     as _i604;
 import '../../features/sales_tab/domain/use_cases/get_sales_orders_use_case.dart'
     as _i600;
+import '../../features/sales_tab/presentation/manager/sales_orders_cubit/sales_orders_cubit.dart'
+    as _i307;
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -102,6 +104,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i600.GetSalesOrdersUseCase>(
       () => _i600.GetSalesOrdersUseCase(
         salesOredersRepo: gh<_i604.SalesOrdersRepo>(),
+      ),
+    );
+    gh.factory<_i307.SalesOrdersCubit>(
+      () => _i307.SalesOrdersCubit(
+        getSalesOrdersUseCase: gh<_i600.GetSalesOrdersUseCase>(),
       ),
     );
     gh.factory<_i227.CustomersCubit>(

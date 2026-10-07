@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:twos_home_wear_app/features/sales_tab/presentation/models/sales_order_model.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/sales_order_card.dart';
 
 class SalesOrdersListView extends StatelessWidget {
@@ -9,7 +9,7 @@ class SalesOrdersListView extends StatelessWidget {
     required this.onTap,
   });
 
-  final List<SalesOrderModel> orders;
+  final List<SaleOrderEntity> orders;
   final void Function()? onTap;
 
   @override
