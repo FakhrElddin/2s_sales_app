@@ -52,4 +52,15 @@ class AppStyles {
     fontSize: 12,
     fontWeight: FontWeight.w600,
   );
+  static const TextStyle regular14Text = TextStyle(
+    color: AppColors.textSecondaryColor,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+  );
+  static const TextStyle semiBold11Text = TextStyle(
+    color: AppColors.textSecondaryColor,
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+  );
 }
