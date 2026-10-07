@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twos_home_wear_app/core/config/app_routes.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/core/widgets/custom_text_form_field.dart';
 import 'package:twos_home_wear_app/features/customers_tab/presentation/models/customer_model.dart';
@@ -82,7 +83,12 @@ class _CustomersTabState extends State<CustomersTab> {
                   Expanded(
                     child: CustomersListView(
                       customers: mockCustomers,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.customerDetailsScreenRoute,
+                        );
+                      },
                     ),
                   ),
                 ],
