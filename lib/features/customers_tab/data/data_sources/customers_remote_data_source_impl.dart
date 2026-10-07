@@ -25,7 +25,7 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
         searchFilters.add(["name", "ilike", search.trim()]);
       }
       var response = await apiManager.postData(
-        endPoint: EndPoints.getCustomersEndPoint,
+        endPoint: EndPoints.callKwEndPoint,
         data: {
           'jsonrpc': '2.0',
           'method': 'call',
@@ -80,7 +80,7 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
   }) async {
     try {
       var response = await apiManager.postData(
-        endPoint: EndPoints.getCustomersEndPoint,
+        endPoint: EndPoints.callKwEndPoint,
         data: {
           'jsonrpc': '2.0',
           'method': 'call',
