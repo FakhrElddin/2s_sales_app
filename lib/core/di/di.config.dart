@@ -36,6 +36,16 @@ import '../../features/login/domain/repositories/login_repo.dart' as _i1061;
 import '../../features/login/domain/use_cases/login_use_case.dart' as _i191;
 import '../../features/login/presentation/manager/login_cubit/login_cubit.dart'
     as _i994;
+import '../../features/sales_tab/data/data_sources/sales_orders_remote_data_source_impl.dart'
+    as _i520;
+import '../../features/sales_tab/data/repositories/sales_orders_repo_impl.dart'
+    as _i146;
+import '../../features/sales_tab/domain/data_sources/sales_orders_remote_data_source.dart'
+    as _i586;
+import '../../features/sales_tab/domain/repositories/sales_orders_repo.dart'
+    as _i604;
+import '../../features/sales_tab/domain/use_cases/get_sales_orders_use_case.dart'
+    as _i600;
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -55,6 +65,11 @@ extension GetItInjectableX on _i174.GetIt {
         apiManager: gh<_i1047.ApiManager>(),
       ),
     );
+    gh.factory<_i586.SalesOrdersRemoteDataSource>(
+      () => _i520.SalesOrdersRemoteDataSourceImpl(
+        apiManager: gh<_i1047.ApiManager>(),
+      ),
+    );
     gh.factory<_i1061.LoginRepo>(
       () => _i546.LoginRepoImpl(
         loginRemoteDataSource: gh<_i362.LoginRemoteDataSource>(),
@@ -63,6 +78,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1020.CustomersRepo>(
       () => _i822.CustomersRepoImpl(
         customersRemoteDataSoucre: gh<_i128.CustomersRemoteDataSoucre>(),
+      ),
+    );
+    gh.factory<_i604.SalesOrdersRepo>(
+      () => _i146.SalesOrdersRepoImpl(
+        salesOrdersRemoteDataSource: gh<_i586.SalesOrdersRemoteDataSource>(),
       ),
     );
     gh.factory<_i191.LoginUseCase>(
@@ -77,6 +97,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i545.UpdateCustomerPhoneUseCase>(
       () => _i545.UpdateCustomerPhoneUseCase(
         customersRepo: gh<_i1020.CustomersRepo>(),
+      ),
+    );
+    gh.factory<_i600.GetSalesOrdersUseCase>(
+      () => _i600.GetSalesOrdersUseCase(
+        salesOredersRepo: gh<_i604.SalesOrdersRepo>(),
       ),
     );
     gh.factory<_i227.CustomersCubit>(
