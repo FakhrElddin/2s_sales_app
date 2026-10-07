@@ -27,56 +27,63 @@ class _CustomersTabState extends State<CustomersTab> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<CustomersCubit>()..getCustomers(),
-      child: SafeArea(
-        child: Column(
-          children: [
-            CustomTabAppBar(title: 'Customers'),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 14),
-                    CustomTextFormField(
-                      controller: searchController,
-                      hintText: 'Search customers...',
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: AppColors.greyColor,
-                        size: 22,
-                      ),
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.search,
-                      onChanged: (value) {},
+      child: Builder(
+        builder: (context) {
+          return SafeArea(
+            child: Column(
+              children: [
+                CustomTabAppBar(title: 'Customers'),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 14),
+                        CustomTextFormField(
+                          controller: searchController,
+                          hintText: 'Search customers...',
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.greyColor,
+                            size: 22,
+                          ),
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.search,
+                          onChanged: (value) {
+                            BlocProvider.of<CustomersCubit>(context)
+                                .getCustomers(search: value);
+                          },
+                        ),
+                        const SizedBox(height: 14),
+                        Expanded(
+                          child: BlocBuilder<CustomersCubit, CustomersState>(
+                            builder: (context, state) {
+                              if (state is CustomersSuccess) {
+                                return CustomersListView(
+                                  customers: state.customers,
+                                );
+                              } else if (state is CustomersError) {
+                                return Center(
+                                  child: Text(state.failure.errorMessage),
+                                );
+                              } else {
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.primaryColor,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 14),
-                    Expanded(
-                      child: BlocBuilder<CustomersCubit, CustomersState>(
-                        builder: (context, state) {
-                          if (state is CustomersSuccess) {
-                            return CustomersListView(
-                              customers: state.customers,
-                            );
-                          } else if (state is CustomersError) {
-                            return Center(
-                              child: Text(state.failure.errorMessage),
-                            );
-                          } else {
-                            return Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primaryColor,
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

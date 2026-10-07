@@ -18,6 +18,12 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
     String? search,
   }) async {
     try {
+      List<dynamic> searchFilters = [
+        ["customer_rank", ">", 0],
+      ];
+      if (search != null && search.trim().isNotEmpty) {
+        searchFilters.add(["name", "ilike", search.trim()]);
+      }
       var response = await apiManager.postData(
         endPoint: EndPoints.getCustomersEndPoint,
         data: {
@@ -26,11 +32,7 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
           'params': {
             "model": "res.partner",
             "method": "search_read",
-            "args": [
-              [
-                ["customer_rank", ">", 0],
-              ],
-            ],
+            "args": [searchFilters],
             "kwargs": {
               "fields": ["id", "name", "phone", "city", "email", "street"],
               "limit": 50,
