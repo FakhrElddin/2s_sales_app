@@ -13,6 +13,15 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/login/data/data_sources/login_remote_data_source_impl.dart'
+    as _i321;
+import '../../features/login/data/repositories/login_repo_impl.dart' as _i546;
+import '../../features/login/domain/data_sources/login_remote_data_source.dart'
+    as _i362;
+import '../../features/login/domain/repositories/login_repo.dart' as _i1061;
+import '../../features/login/domain/use_cases/login_use_case.dart' as _i191;
+import '../../features/login/presentation/manager/login_cubit/login_cubit.dart'
+    as _i994;
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -23,6 +32,21 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
+    gh.factory<_i362.LoginRemoteDataSource>(
+      () =>
+          _i321.LoginRemoteDataSourceImpl(apiManager: gh<_i1047.ApiManager>()),
+    );
+    gh.factory<_i1061.LoginRepo>(
+      () => _i546.LoginRepoImpl(
+        loginRemoteDataSource: gh<_i362.LoginRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i191.LoginUseCase>(
+      () => _i191.LoginUseCase(loginRepo: gh<_i1061.LoginRepo>()),
+    );
+    gh.factory<_i994.LoginCubit>(
+      () => _i994.LoginCubit(loginUseCase: gh<_i191.LoginUseCase>()),
+    );
     return this;
   }
 }

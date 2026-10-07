@@ -12,4 +12,6 @@ class AppColors {
   static const Color cardBorderColor = Color(0xFFEBEDFF);
   static const Color containerBackgroundColor = Color(0xFFF3F2FF);
   static const Color labelTextColor = Color(0xFF4C5E85);
+  static const Color successColor = Color(0xFF2E7D32);
+  static const Color infoColor = Color(0xFF1B2A4A);
 }

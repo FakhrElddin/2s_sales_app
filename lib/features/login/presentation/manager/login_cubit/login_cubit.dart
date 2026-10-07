@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:twos_home_wear_app/core/errors/failures.dart';
 import 'package:twos_home_wear_app/features/login/domain/entities/login_entity.dart';
@@ -6,6 +7,7 @@ import 'package:twos_home_wear_app/features/login/domain/use_cases/login_use_cas
 
 part 'login_state.dart';
 
+@injectable
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.loginUseCase}) : super(LoginInitial());
   final LoginUseCase loginUseCase;
