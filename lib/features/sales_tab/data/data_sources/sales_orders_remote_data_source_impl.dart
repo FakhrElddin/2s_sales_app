@@ -142,8 +142,48 @@ class SalesOrdersRemoteDataSourceImpl implements SalesOrdersRemoteDataSource {
   }
 
   @override
-  Future<Either<Failures, bool>> confirmOrder({required int orderId}) {
-    // TODO: implement confirmOrder
-    throw UnimplementedError();
+  Future<Either<Failures, bool>> confirmOrder({required int orderId}) async {
+    try {
+      var response = await apiManager.postData(
+        endPoint: EndPoints.callKwEndPoint,
+        data: {
+          "jsonrpc": "2.0",
+          "method": "call",
+          "params": {
+            "model": "sale.order",
+            "method": "action_confirm",
+            "args": [
+              [orderId],
+            ],
+            "kwargs": {},
+          },
+        },
+      );
+      if (response.data['result'] != null) {
+        return Right(true);
+      } else if (response.data['error'] != null) {
+        return Left(
+          UnexpectedError(
+            errorMessage:
+                response.data['error']['message'] ??
+                'Failed to confirm order, please try again',
+          ),
+        );
+      } else {
+        return Left(
+          UnexpectedError(
+            errorMessage: 'Failed to confirm order, please try again',
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(ServerError.fromDioException(e));
+    } catch (e) {
+      return Left(
+        UnexpectedError(
+          errorMessage: 'Failed to confirm order, please try again',
+        ),
+      );
+    }
   }
 }

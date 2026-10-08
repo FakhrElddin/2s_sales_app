@@ -34,8 +34,13 @@ class SalesOrdersRepoImpl implements SalesOrdersRepo {
   }
 
   @override
-  Future<Either<Failures, bool>> confirmOrder({required int orderId}) {
-    // TODO: implement confirmOrder
-    throw UnimplementedError();
+  Future<Either<Failures, bool>> confirmOrder({required int orderId}) async {
+    var either = await salesOrdersRemoteDataSource.confirmOrder(
+      orderId: orderId,
+    );
+    return either.fold(
+      (failure) => Left(failure),
+      (isConfirmed) => Right(isConfirmed),
+    );
   }
 }
