@@ -4,8 +4,6 @@ import 'package:twos_home_wear_app/core/di/di.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/manager/order_details_cubit/order_details_cubit.dart';
-import 'package:twos_home_wear_app/features/sales_tab/presentation/models/order_item_model.dart';
-import 'package:twos_home_wear_app/features/sales_tab/presentation/models/sales_order_model.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order_confirm_bottom_bar.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order_customer_card.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order_details_app_bar.dart';
@@ -13,31 +11,11 @@ import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order_summary_card.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  const OrderDetailsScreen({super.key, this.order});
-
-  final SalesOrderModel? order;
-
-  static const SalesOrderModel defaultOrder = SalesOrderModel(
-    orderNumber: '#S00001',
-    customerName: 'Ahmed Hassan',
-    amount: '1,938.00 LE',
-    date: 'Oct 05, 2026',
-    status: 'Quotation',
-  );
-
-  static const List<OrderItemModel> defaultItems = [
-    OrderItemModel(
-      name: "Men's Cotton Pajama Set",
-      quantity: 2,
-      price: '1,700.00 LE',
-    ),
-    OrderItemModel(name: 'Sateen Sleep Mask', quantity: 1, price: '0.00 LE'),
-  ];
+  const OrderDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final order = ModalRoute.of(context)?.settings.arguments as SaleOrderEntity;
-    //final currentOrder = order ?? routeOrder ?? defaultOrder;
 
     return BlocProvider(
       create: (context) =>
@@ -46,6 +24,14 @@ class OrderDetailsScreen extends StatelessWidget {
         body: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
           builder: (context, state) {
             if (state is OrderDetailsSuccess) {
+              double subtotal = 0;
+              for (var item in state.orderDetails) {
+                subtotal += item.priceSubtotal;
+              }
+              double grandTotal = order.amountTotal;
+              double vat = (grandTotal - subtotal) > 0
+                  ? (grandTotal - subtotal)
+                  : 0;
               return SafeArea(
                 child: Column(
                   children: [
@@ -62,12 +48,12 @@ class OrderDetailsScreen extends StatelessWidget {
                               status: order.status,
                             ),
                             const SizedBox(height: 12),
-                            const OrderItemsCard(items: defaultItems),
+                            OrderItemsCard(items: state.orderDetails),
                             const SizedBox(height: 12),
                             OrderSummaryCard(
-                              subtotal: '1,700.00 LE',
-                              vat: '238.00 LE',
-                              grandTotal: 'currentOrder.amount',
+                              subtotal: '$subtotal LE',
+                              vat: '$vat LE',
+                              grandTotal: '$grandTotal LE',
                             ),
                           ],
                         ),
