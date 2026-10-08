@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:twos_home_wear_app/core/di/di.dart';
+import 'package:twos_home_wear_app/core/utils/app_colors.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
+import 'package:twos_home_wear_app/features/sales_tab/presentation/manager/order_details_cubit/order_details_cubit.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/models/order_item_model.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/models/sales_order_model.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order_confirm_bottom_bar.dart';
@@ -31,42 +36,57 @@ class OrderDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final routeOrder =
-        ModalRoute.of(context)?.settings.arguments as SalesOrderModel?;
-    final currentOrder = order ?? routeOrder ?? defaultOrder;
+    final order = ModalRoute.of(context)?.settings.arguments as SaleOrderEntity;
+    //final currentOrder = order ?? routeOrder ?? defaultOrder;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            OrderDetailsAppBar(orderNumber: currentOrder.orderNumber),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(16),
+    return BlocProvider(
+      create: (context) =>
+          getIt<OrderDetailsCubit>()..getOrderDetails(orderId: order.id),
+      child: Scaffold(
+        body: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+          builder: (context, state) {
+            if (state is OrderDetailsSuccess) {
+              return SafeArea(
                 child: Column(
                   children: [
-                    OrderCustomerCard(
-                      customerName: currentOrder.customerName,
-                      date: currentOrder.date,
-                      status: currentOrder.status,
-                    ),
-                    const SizedBox(height: 12),
-                    const OrderItemsCard(items: defaultItems),
-                    const SizedBox(height: 12),
-                    OrderSummaryCard(
-                      subtotal: '1,700.00 LE',
-                      vat: '238.00 LE',
-                      grandTotal: currentOrder.amount,
+                    OrderDetailsAppBar(orderNumber: order.orderNumber),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            OrderCustomerCard(
+                              customerName: order.customerName,
+                              date: order.date,
+                              status: order.status,
+                            ),
+                            const SizedBox(height: 12),
+                            const OrderItemsCard(items: defaultItems),
+                            const SizedBox(height: 12),
+                            OrderSummaryCard(
+                              subtotal: '1,700.00 LE',
+                              vat: '238.00 LE',
+                              grandTotal: 'currentOrder.amount',
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ),
-          ],
+              );
+            } else if (state is OrderDetailsError) {
+              return Center(child: Text(state.failure.errorMessage));
+            } else {
+              return Center(
+                child: CircularProgressIndicator(color: AppColors.primaryColor),
+              );
+            }
+          },
         ),
+        bottomNavigationBar: OrderConfirmBottomBar(onConfirm: () {}),
       ),
-      bottomNavigationBar: OrderConfirmBottomBar(onConfirm: () {}),
     );
   }
 }

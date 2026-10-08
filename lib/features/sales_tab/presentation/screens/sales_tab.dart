@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:twos_home_wear_app/core/config/app_routes.dart';
 import 'package:twos_home_wear_app/core/di/di.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/features/customers_tab/presentation/widgets/customers_tab_app_bar.dart';
@@ -40,12 +39,6 @@ class SalesTab extends StatelessWidget {
                                 Expanded(
                                   child: SalesOrdersListView(
                                     orders: state.salesOrders,
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                        context,
-                                        AppRoutes.orderDetailsScreenRoute,
-                                      );
-                                    },
                                   ),
                                 ),
                               ],

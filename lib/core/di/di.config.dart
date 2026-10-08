@@ -44,8 +44,12 @@ import '../../features/sales_tab/domain/data_sources/sales_orders_remote_data_so
     as _i586;
 import '../../features/sales_tab/domain/repositories/sales_orders_repo.dart'
     as _i604;
+import '../../features/sales_tab/domain/use_cases/get_order_details_use_case.dart'
+    as _i794;
 import '../../features/sales_tab/domain/use_cases/get_sales_orders_use_case.dart'
     as _i600;
+import '../../features/sales_tab/presentation/manager/order_details_cubit/order_details_cubit.dart'
+    as _i637;
 import '../../features/sales_tab/presentation/manager/sales_orders_cubit/sales_orders_cubit.dart'
     as _i307;
 import '../api/api_manager.dart' as _i1047;
@@ -90,6 +94,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i191.LoginUseCase>(
       () => _i191.LoginUseCase(loginRepo: gh<_i1061.LoginRepo>()),
     );
+    gh.factory<_i794.GetOrderDetailsUseCase>(
+      () => _i794.GetOrderDetailsUseCase(
+        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
+      ),
+    );
+    gh.factory<_i600.GetSalesOrdersUseCase>(
+      () => _i600.GetSalesOrdersUseCase(
+        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
+      ),
+    );
     gh.factory<_i994.LoginCubit>(
       () => _i994.LoginCubit(loginUseCase: gh<_i191.LoginUseCase>()),
     );
@@ -101,14 +115,14 @@ extension GetItInjectableX on _i174.GetIt {
         customersRepo: gh<_i1020.CustomersRepo>(),
       ),
     );
-    gh.factory<_i600.GetSalesOrdersUseCase>(
-      () => _i600.GetSalesOrdersUseCase(
-        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
-      ),
-    );
     gh.factory<_i307.SalesOrdersCubit>(
       () => _i307.SalesOrdersCubit(
         getSalesOrdersUseCase: gh<_i600.GetSalesOrdersUseCase>(),
+      ),
+    );
+    gh.factory<_i637.OrderDetailsCubit>(
+      () => _i637.OrderDetailsCubit(
+        getOrderDetailsUseCase: gh<_i794.GetOrderDetailsUseCase>(),
       ),
     );
     gh.factory<_i227.CustomersCubit>(
