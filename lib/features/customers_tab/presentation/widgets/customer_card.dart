@@ -47,7 +47,7 @@ class CustomerCard extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           customer.name?[0].toUpperCase() ?? '?',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: AppColors.textPrimaryColor,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,

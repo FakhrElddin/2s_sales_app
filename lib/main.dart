@@ -23,11 +23,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        AppRoutes.loginScreenRoute: (context) => LoginScreen(),
-        AppRoutes.homeScreenRoute: (context) => HomeScreen(),
+        AppRoutes.loginScreenRoute: (context) => const LoginScreen(),
+        AppRoutes.homeScreenRoute: (context) => const HomeScreen(),
         AppRoutes.customerDetailsScreenRoute: (context) =>
-            CustomerDetailsScreen(),
-        AppRoutes.orderDetailsScreenRoute: (context) => OrderDetailsScreen(),
+            const CustomerDetailsScreen(),
+        AppRoutes.orderDetailsScreenRoute: (context) =>
+            const OrderDetailsScreen(),
       },
       initialRoute: AppRoutes.loginScreenRoute,
       theme: AppThemes.lightTheme,

@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedNavIndex = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Customers'),
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt_long),
