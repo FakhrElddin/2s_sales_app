@@ -16,6 +16,8 @@ class SalesOrdersCubit extends Cubit<SalesOrdersState> {
   void getSalesOrders() async {
     emit(SalesOrdersLoading());
     var either = await getSalesOrdersUseCase.call();
+    // if session expired not cuase exception when navigate to login screen
+    if (isClosed) return;
     either.fold(
       (failure) => emit(SalesOrdersError(failure: failure)),
       (salesOrders) => emit(SalesOrdersSuccess(salesOrders: salesOrders)),

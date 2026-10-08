@@ -29,8 +29,11 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
       );
       if (response.data['result'] != null) {
         LoginModel loginModel = LoginModel.fromJson(response.data);
-        await SharedPrefsUtils.saveData(key: 'is_internal_user',value: loginModel.isInternalUser ?? false);
-        await SharedPrefsUtils.saveData(key: 'user_name',value: loginModel.name ?? '');
+        await _cacheData(
+          name: loginModel.name ?? '',
+          isInternalUser: loginModel.isInternalUser ?? false,
+          cookies: response.headers.map['set-cookie'],
+        );
         return Right(loginModel);
       } else if (response.data['error'] != null) {
         return Left(
@@ -52,5 +55,33 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
         UnexpectedError(errorMessage: 'Failed to login, please try again'),
       );
     }
+  }
+
+  String? _getSessionId(List<String>? cookies) {
+    if (cookies != null) {
+      for (var cookie in cookies) {
+        if (cookie.contains('session_id=')) {
+          return cookie.split('session_id=')[1].split(';')[0];
+        }
+      }
+    }
+    return null;
+  }
+
+  Future<void> _cacheData({
+    required String name,
+    required bool isInternalUser,
+    List<String>? cookies,
+  }) async {
+    String? sessionId = _getSessionId(cookies);
+    if (sessionId != null) {
+      await SharedPrefsUtils.saveData(key: 'session_id', value: sessionId);
+    }
+
+    await SharedPrefsUtils.saveData(
+      key: 'is_internal_user',
+      value: isInternalUser,
+    );
+    await SharedPrefsUtils.saveData(key: 'user_name', value: name);
   }
 }
