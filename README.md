@@ -29,115 +29,40 @@
 ## 📱 Visual Showcase (Screenshots)
 
 ### 1. Onboarding & Authentication
-<table>
-  <tr>
-    <td width="33.3%" align="center"><strong>Splash Screen</strong></td>
-    <td width="33.3%" align="center"><strong>Login Screen</strong></td>
-    <td width="33.3%" align="center"><strong>Login Error Dialog</strong></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/01_splash_screen.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/02_login_screen.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/03_login_failed_dialog.png" width="100%" /></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Native Splash with App Logo</sub></td>
-    <td align="center"><sub>Odoo Credentials Entry</sub></td>
-    <td align="center"><sub>Clear Error Alert</sub></td>
-  </tr>
-</table>
+| Splash Screen | Login Screen | Login Error Dialog |
+| :---: | :---: | :---: |
+| <img src="screenshots/01_splash_screen.png" width="220" /> | <img src="screenshots/02_login_screen.png" width="220" /> | <img src="screenshots/03_login_failed_dialog.png" width="220" /> |
+| Native Splash with App Logo | Odoo Credentials Entry | Clear Error Alert |
 
 ### 2. Customers Management & Validation
-<table>
-  <tr>
-    <td width="33.3%" align="center"><strong>Customer List</strong></td>
-    <td width="33.3%" align="center"><strong>Instant Search</strong></td>
-    <td width="33.3%" align="center"><strong>Customer Details</strong></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/04_customers_list.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/05_customers_search.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/06_customer_details.png" width="100%" /></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Fetches customer_rank > 0</sub></td>
-    <td align="center"><sub>Real-time Search by Name</sub></td>
-    <td align="center"><sub>Address, Email & Phone</sub></td>
-  </tr>
-</table>
+| Customer List | Instant Search | Customer Details |
+| :---: | :---: | :---: |
+| <img src="screenshots/04_customers_list.png" width="220" /> | <img src="screenshots/05_customers_search.png" width="220" /> | <img src="screenshots/06_customer_details.png" width="220" /> |
+| Fetches `customer_rank > 0` | Real-time Search by Name | Address, Email & Phone |
 
-<br />
-
-<table>
-  <tr>
-    <td width="33.3%" align="center"><strong>Edit Phone</strong></td>
-    <td width="33.3%" align="center"><strong>Validation Error</strong></td>
-    <td width="33.3%" align="center"><strong>Update Success</strong></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/07_customer_phone_edit.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/08_customer_phone_validation_error.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/09_customer_phone_update_success.png" width="100%" /></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>In-place Editing</sub></td>
-    <td align="center"><sub>Egyptian Regex Check</sub></td>
-    <td align="center"><sub>Synced directly to Odoo</sub></td>
-  </tr>
-</table>
+| Edit Phone | Phone Validation Error | Update Success |
+| :---: | :---: | :---: |
+| <img src="screenshots/07_customer_phone_edit.png" width="220" /> | <img src="screenshots/08_customer_phone_validation_error.png" width="220" /> | <img src="screenshots/09_customer_phone_update_success.png" width="220" /> |
+| In-place Editing | Egyptian Mobile Regex Check | Synced directly to Odoo |
 
 ### 3. Sales Orders Workflow & RBAC
-<table>
-  <tr>
-    <td width="33.3%" align="center"><strong>Access Restricted</strong></td>
-    <td width="33.3%" align="center"><strong>Orders (All)</strong></td>
-    <td width="33.3%" align="center"><strong>Orders (Draft)</strong></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/10_sales_orders_access_restricted.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/11_sales_orders_list_all.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/12_sales_orders_list_draft.png" width="100%" /></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Non-internal restricted</sub></td>
-    <td align="center"><sub>All commercial orders</sub></td>
-    <td align="center"><sub>Quotations awaiting action</sub></td>
-  </tr>
-</table>
 
-<br />
+#### Access Control & Order Filtering
+| Access Restricted | Sales Orders (All) |
+| :---: | :---: |
+| <img src="screenshots/10_sales_orders_access_restricted.png" width="240" /> | <img src="screenshots/11_sales_orders_list_all.png" width="240" /> |
+| Non-internal users restricted | All commercial orders (`sale.order`) |
 
-<table>
-  <tr>
-    <td width="33.3%" align="center"><strong>Orders (Confirmed)</strong></td>
-    <td width="33.3%" align="center"><strong>Order Details</strong></td>
-    <td width="33.3%" align="center"><strong>Confirm Dialog</strong></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/13_sales_orders_list_confirmed.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/14_order_details_draft.png" width="100%" /></td>
-    <td align="center"><img src="screenshots/15_order_confirm_success_dialog.png" width="100%" /></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Confirmed sales orders</sub></td>
-    <td align="center"><sub>Items, pricing & VAT</sub></td>
-    <td align="center"><sub>action_confirm trigger</sub></td>
-  </tr>
-</table>
+| Sales Orders (Draft) | Sales Orders (Confirmed) |
+| :---: | :---: |
+| <img src="screenshots/12_sales_orders_list_draft.png" width="240" /> | <img src="screenshots/13_sales_orders_list_confirmed.png" width="240" /> |
+| Filtered draft quotations | Filtered confirmed orders (`state == sale`) |
 
-<br />
-
-<table>
-  <tr>
-    <td width="50%" align="center"><strong>Confirmed Order View</strong></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/16_order_details_confirmed.png" width="50%" /></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Order status updated to 'sale' in Odoo</sub></td>
-  </tr>
-</table>
+#### Order Confirmation Lifecycle
+| Draft Order Line Items | Confirm Order Dialog | Confirmed Order Details |
+| :---: | :---: | :---: |
+| <img src="screenshots/14_order_details_draft.png" width="220" /> | <img src="screenshots/15_order_confirm_success_dialog.png" width="220" /> | <img src="screenshots/16_order_details_confirmed.png" width="220" /> |
+| Items, quantities, prices & VAT | Live `action_confirm` prompt | Read-only state updated to `sale` |
 
 ---
 
