@@ -20,6 +20,8 @@ class CustomersCubit extends Cubit<CustomersState> {
   void getCustomers({String? search}) async {
     emit(CustomersLoading());
     var either = await getCustomersUseCase.call(search: search);
+    // if session expired not cuase exception when navigate to login screen
+    if (isClosed) return;
     either.fold(
       (failure) => emit(CustomersError(failure: failure)),
       (customers) => emit(CustomersSuccess(customers: customers)),

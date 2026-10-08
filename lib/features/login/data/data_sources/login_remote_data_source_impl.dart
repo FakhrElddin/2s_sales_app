@@ -75,7 +75,7 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
   }) async {
     String? sessionId = _getSessionId(cookies);
     if (sessionId != null) {
-      await SharedPrefsUtils.saveData(key: 'sessionId', value: sessionId);
+      await SharedPrefsUtils.saveData(key: 'session_id', value: sessionId);
     }
 
     await SharedPrefsUtils.saveData(
