@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:twos_home_wear_app/core/api/api_manager.dart';
 import 'package:twos_home_wear_app/core/api/end_points.dart';
 import 'package:twos_home_wear_app/core/errors/failures.dart';
+import 'package:twos_home_wear_app/core/utils/internet_checker.dart';
 import 'package:twos_home_wear_app/features/customers_tab/data/models/customer_model.dart';
 import 'package:twos_home_wear_app/features/customers_tab/domain/data_sources/customers_remote_data_soucre.dart';
 import 'package:twos_home_wear_app/features/customers_tab/domain/entities/customer_entity.dart';
@@ -18,6 +19,9 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
     String? search,
   }) async {
     try {
+      if (!await InternetChecker.hasInternet()) {
+        return Left(NetworkError());
+      }
       List<dynamic> searchFilters = [
         ["customer_rank", ">", 0],
       ];
@@ -79,6 +83,9 @@ class CustomersRemoteDataSourceImpl implements CustomersRemoteDataSoucre {
     required String phone,
   }) async {
     try {
+      if (!await InternetChecker.hasInternet()) {
+        return Left(NetworkError());
+      }
       var response = await apiManager.postData(
         endPoint: EndPoints.callKwEndPoint,
         data: {

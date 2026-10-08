@@ -20,6 +20,8 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   void getOrderDetails({required int orderId}) async {
     emit(OrderDetailsLoading());
     var either = await getOrderDetailsUseCase.call(orderId: orderId);
+    // if session expired not cuase exception when navigate to login screen
+    if (isClosed) return;
     either.fold(
       (failure) => emit(OrderDetailsError(failure: failure)),
       (orderDetails) => emit(OrderDetailsSuccess(orderDetails: orderDetails)),
