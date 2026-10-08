@@ -8,4 +8,5 @@ abstract class SalesOrdersRepo {
   Future<Either<Failures, List<OrderDetailsEntity>>> getOrderDetails({
     required int orderId,
   });
+  Future<Either<Failures, bool>> confirmOrder({required int orderId});
 }

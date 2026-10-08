@@ -32,4 +32,10 @@ class SalesOrdersRepoImpl implements SalesOrdersRepo {
       (orderDetails) => Right(orderDetails),
     );
   }
+
+  @override
+  Future<Either<Failures, bool>> confirmOrder({required int orderId}) {
+    // TODO: implement confirmOrder
+    throw UnimplementedError();
+  }
 }
