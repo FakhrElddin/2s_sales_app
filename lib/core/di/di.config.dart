@@ -12,10 +12,14 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/customers_tab/data/data_sources/customers_local_data_source_impl.dart'
+    as _i869;
 import '../../features/customers_tab/data/data_sources/customers_remote_data_source_impl.dart'
     as _i194;
 import '../../features/customers_tab/data/repositories/customers_repo_impl.dart'
     as _i822;
+import '../../features/customers_tab/domain/data_sources/customers_local_data_source.dart'
+    as _i777;
 import '../../features/customers_tab/domain/data_sources/customers_remote_data_soucre.dart'
     as _i128;
 import '../../features/customers_tab/domain/repositories/customers_repo.dart'
@@ -67,18 +71,22 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
+    gh.factory<_i777.CustomersLocalDataSource>(
+        () => _i869.CustomersLocalDataSourceImpl());
     gh.factory<_i362.LoginRemoteDataSource>(() =>
         _i321.LoginRemoteDataSourceImpl(apiManager: gh<_i1047.ApiManager>()));
     gh.factory<_i128.CustomersRemoteDataSoucre>(() =>
         _i194.CustomersRemoteDataSourceImpl(
             apiManager: gh<_i1047.ApiManager>()));
+    gh.factory<_i1020.CustomersRepo>(() => _i822.CustomersRepoImpl(
+          customersRemoteDataSoucre: gh<_i128.CustomersRemoteDataSoucre>(),
+          customersLocalDataSource: gh<_i777.CustomersLocalDataSource>(),
+        ));
     gh.factory<_i1061.LoginRepo>(() => _i546.LoginRepoImpl(
         loginRemoteDataSource: gh<_i362.LoginRemoteDataSource>()));
     gh.factory<_i586.SalesOrdersRemoteDataSource>(() =>
         _i520.SalesOrdersRemoteDataSourceImpl(
             apiManager: gh<_i1047.ApiManager>()));
-    gh.factory<_i1020.CustomersRepo>(() => _i822.CustomersRepoImpl(
-        customersRemoteDataSoucre: gh<_i128.CustomersRemoteDataSoucre>()));
     gh.factory<_i604.SalesOrdersRepo>(() => _i146.SalesOrdersRepoImpl(
         salesOrdersRemoteDataSource: gh<_i586.SalesOrdersRemoteDataSource>()));
     gh.factory<_i191.LoginUseCase>(
