@@ -6,11 +6,11 @@ import 'package:twos_home_wear_app/features/sales_tab/domain/repositories/sales_
 
 @injectable
 class GetSalesOrdersUseCase {
-  final SalesOrdersRepo salesOredersRepo;
+  final SalesOrdersRepo salesOrdersRepo;
 
-  GetSalesOrdersUseCase({required this.salesOredersRepo});
+  GetSalesOrdersUseCase({required this.salesOrdersRepo});
 
   Future<Either<Failures, List<SaleOrderEntity>>> call() {
-    return salesOredersRepo.getSalesOrder();
+    return salesOrdersRepo.getSalesOrders();
   }
 }

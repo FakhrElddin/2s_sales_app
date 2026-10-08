@@ -6,6 +6,7 @@ import 'package:twos_home_wear_app/core/api/end_points.dart';
 import 'package:twos_home_wear_app/core/errors/failures.dart';
 import 'package:twos_home_wear_app/features/sales_tab/data/models/sale_order_model.dart';
 import 'package:twos_home_wear_app/features/sales_tab/domain/data_sources/sales_orders_remote_data_source.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/order_details_entity.dart';
 import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
 
 @Injectable(as: SalesOrdersRemoteDataSource)
@@ -71,5 +72,13 @@ class SalesOrdersRemoteDataSourceImpl implements SalesOrdersRemoteDataSource {
         ),
       );
     }
+  }
+
+  @override
+  Future<Either<Failures, List<OrderDetailsEntity>>> getOrderDetails({
+    required int orderId,
+  }) {
+    // TODO: implement getOrderDetails
+    throw UnimplementedError();
   }
 }

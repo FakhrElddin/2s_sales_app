@@ -103,7 +103,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i600.GetSalesOrdersUseCase>(
       () => _i600.GetSalesOrdersUseCase(
-        salesOredersRepo: gh<_i604.SalesOrdersRepo>(),
+        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
       ),
     );
     gh.factory<_i307.SalesOrdersCubit>(
