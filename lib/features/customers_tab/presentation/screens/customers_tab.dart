@@ -32,7 +32,7 @@ class _CustomersTabState extends State<CustomersTab> {
           return SafeArea(
             child: Column(
               children: [
-                CustomTabAppBar(title: 'Customers'),
+                const CustomTabAppBar(title: 'Customers'),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -67,7 +67,7 @@ class _CustomersTabState extends State<CustomersTab> {
                                   child: Text(state.failure.errorMessage),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(
                                     color: AppColors.primaryColor,
                                   ),

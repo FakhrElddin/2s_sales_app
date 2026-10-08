@@ -160,7 +160,7 @@ class SalesOrdersRemoteDataSourceImpl implements SalesOrdersRemoteDataSource {
         },
       );
       if (response.data['result'] != null) {
-        return Right(true);
+        return const Right(true);
       } else if (response.data['error'] != null) {
         return Left(
           UnexpectedError(

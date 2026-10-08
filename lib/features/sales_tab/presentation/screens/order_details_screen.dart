@@ -80,7 +80,7 @@ class OrderDetailsScreen extends StatelessWidget {
             } else if (state is OrderDetailsError) {
               return Center(child: Text(state.failure.errorMessage));
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(color: AppColors.primaryColor),
               );
             }
@@ -104,7 +104,7 @@ class OrderDetailsScreen extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is ConfirmOrderLoading) {
-              return SafeArea(
+              return const SafeArea(
                 top: false,
                 bottom: true,
                 child: SizedBox(
@@ -118,7 +118,7 @@ class OrderDetailsScreen extends StatelessWidget {
               );
             } else {
               if (state is ConfirmOrderSuccess || order.status != 'draft') {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               } else {
                 return OrderConfirmBottomBar(
                   onConfirm: () {

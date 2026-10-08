@@ -50,23 +50,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: screenHeight * 0.0947,
                       AppImages.appLogoImage,
                     ),
-                    SizedBox(height: 12),
-                    Text('2S HOMEWEAR', style: AppStyles.bold20Text),
-                    SizedBox(height: 2),
-                    Text('Sales Portal', style: AppStyles.medium14Text),
-                    SizedBox(height: 24),
-                    Align(
+                    const SizedBox(height: 12),
+                    const Text('2S HOMEWEAR', style: AppStyles.bold20Text),
+                    const SizedBox(height: 2),
+                    const Text('Sales Portal', style: AppStyles.medium14Text),
+                    const SizedBox(height: 24),
+                    const Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         'Username / Email',
                         style: AppStyles.semiBold14Text,
                       ),
                     ),
-                    SizedBox(height: 6),
+                    const SizedBox(height: 6),
                     CustomTextFormField(
                       controller: emailController,
                       hintText: 'username',
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.email_outlined,
                         color: AppColors.greyColor,
                       ),
@@ -79,16 +79,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 16),
-                    Align(
+                    const SizedBox(height: 16),
+                    const Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: Text('Password', style: AppStyles.semiBold14Text),
                     ),
-                    SizedBox(height: 6),
+                    const SizedBox(height: 6),
                     CustomTextFormField(
                       controller: passwordController,
                       hintText: 'password',
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.lock_outline,
                         color: AppColors.greyColor,
                       ),
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     BlocConsumer<LoginCubit, LoginState>(
                       listener: (context, state) {
                         if (state is LoginSuccess) {
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       builder: (context, state) {
                         if (state is LoginLoading) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(
                               color: AppColors.primaryColor,
                             ),
