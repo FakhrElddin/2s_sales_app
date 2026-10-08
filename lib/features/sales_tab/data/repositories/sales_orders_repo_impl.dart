@@ -21,8 +21,15 @@ class SalesOrdersRepoImpl implements SalesOrdersRepo {
   }
 
   @override
-  Future<Either<Failures, List<OrderDetailsEntity>>> getOrderDetails({required int orderId}) {
-    // TODO: implement getOrderDetails
-    throw UnimplementedError();
+  Future<Either<Failures, List<OrderDetailsEntity>>> getOrderDetails({
+    required int orderId,
+  }) async {
+    var either = await salesOrdersRemoteDataSource.getOrderDetails(
+      orderId: orderId,
+    );
+    return either.fold(
+      (failure) => Left(failure),
+      (orderDetails) => Right(orderDetails),
+    );
   }
 }
