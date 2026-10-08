@@ -44,6 +44,8 @@ import '../../features/sales_tab/domain/data_sources/sales_orders_remote_data_so
     as _i586;
 import '../../features/sales_tab/domain/repositories/sales_orders_repo.dart'
     as _i604;
+import '../../features/sales_tab/domain/use_cases/confirm_order_use_case.dart'
+    as _i498;
 import '../../features/sales_tab/domain/use_cases/get_order_details_use_case.dart'
     as _i794;
 import '../../features/sales_tab/domain/use_cases/get_sales_orders_use_case.dart'
@@ -94,6 +96,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i191.LoginUseCase>(
       () => _i191.LoginUseCase(loginRepo: gh<_i1061.LoginRepo>()),
     );
+    gh.factory<_i498.ConfirmOrderUseCase>(
+      () => _i498.ConfirmOrderUseCase(
+        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
+      ),
+    );
     gh.factory<_i794.GetOrderDetailsUseCase>(
       () => _i794.GetOrderDetailsUseCase(
         salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
@@ -123,6 +130,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i637.OrderDetailsCubit>(
       () => _i637.OrderDetailsCubit(
         getOrderDetailsUseCase: gh<_i794.GetOrderDetailsUseCase>(),
+        confirmOrderUseCase: gh<_i498.ConfirmOrderUseCase>(),
       ),
     );
     gh.factory<_i227.CustomersCubit>(
