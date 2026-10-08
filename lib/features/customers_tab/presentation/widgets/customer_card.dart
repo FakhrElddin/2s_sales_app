@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/core/utils/app_styles.dart';
-import 'package:twos_home_wear_app/features/customers_tab/presentation/models/customer_model.dart';
+import 'package:twos_home_wear_app/features/customers_tab/domain/entities/customer_entity.dart';
 
 class CustomerCard extends StatelessWidget {
   const CustomerCard({super.key, required this.customer, this.onTap});
 
-  final CustomerModel customer;
+  final CustomerEntity customer;
   final VoidCallback? onTap;
 
   @override
@@ -46,7 +46,7 @@ class CustomerCard extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          customer.initials,
+                          customer.name?[0].toUpperCase() ?? '?',
                           style: TextStyle(
                             color: AppColors.textPrimaryColor,
                             fontSize: 13,
@@ -61,7 +61,7 @@ class CustomerCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              customer.name,
+                              customer.name ?? 'name not found',
                               style: AppStyles.bold14Text,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -76,7 +76,7 @@ class CustomerCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  customer.phoneNumber,
+                                  customer.phone ?? '+20 11',
                                   style: AppStyles.regular12Text,
                                 ),
                                 const SizedBox(width: 12),
@@ -88,7 +88,7 @@ class CustomerCard extends StatelessWidget {
                                 const SizedBox(width: 2),
                                 Flexible(
                                   child: Text(
-                                    customer.city,
+                                    customer.city ?? 'city not',
                                     style: AppStyles.regular12Text,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,

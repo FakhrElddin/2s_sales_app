@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
-import 'package:twos_home_wear_app/features/sales_tab/presentation/models/sales_order_model.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/sales_order_status_badge.dart';
 
 class SalesOrderCard extends StatelessWidget {
@@ -10,7 +10,7 @@ class SalesOrderCard extends StatelessWidget {
     this.onTap,
   });
 
-  final SalesOrderModel order;
+  final SaleOrderEntity order;
   final VoidCallback? onTap;
 
   @override
@@ -71,7 +71,7 @@ class SalesOrderCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      order.amount,
+                      order.amountTotal.toString(),
                       style: const TextStyle(
                         color: Color(0xFF171B2B),
                         fontSize: 17,

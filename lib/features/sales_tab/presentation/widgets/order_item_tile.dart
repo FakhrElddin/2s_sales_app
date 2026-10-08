@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/core/utils/app_styles.dart';
-import 'package:twos_home_wear_app/features/sales_tab/presentation/models/order_item_model.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/order_details_entity.dart';
 
 class OrderItemTile extends StatelessWidget {
-  const OrderItemTile({
-    super.key,
-    required this.item,
-  });
+  const OrderItemTile({super.key, required this.item});
 
-  final OrderItemModel item;
+  final OrderDetailsEntity item;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +20,7 @@ class OrderItemTile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                item.name,
+                item.productName,
                 style: AppStyles.medium14Text.copyWith(
                   color: AppColors.textPrimaryColor,
                 ),
@@ -31,18 +28,12 @@ class OrderItemTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 2),
-              Text(
-                'Qty: ${item.quantity}',
-                style: AppStyles.regular14Text,
-              ),
+              Text('Qty: ${item.quantity}', style: AppStyles.regular14Text),
             ],
           ),
         ),
         const SizedBox(width: 12),
-        Text(
-          item.price,
-          style: AppStyles.semiBold16Text,
-        ),
+        Text(item.priceUnit.toString(), style: AppStyles.semiBold16Text),
       ],
     );
   }

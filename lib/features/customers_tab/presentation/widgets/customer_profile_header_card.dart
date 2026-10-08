@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/core/utils/app_styles.dart';
-import 'package:twos_home_wear_app/features/customers_tab/presentation/models/customer_model.dart';
+import 'package:twos_home_wear_app/features/customers_tab/domain/entities/customer_entity.dart';
 
 class CustomerProfileHeaderCard extends StatelessWidget {
   const CustomerProfileHeaderCard({super.key, required this.customer});
 
-  final CustomerModel customer;
+  final CustomerEntity customer;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,10 @@ class CustomerProfileHeaderCard extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                customer.initials,
-                style: AppStyles.bold20Text.copyWith(color: AppColors.whiteColor),
+                customer.name![0].toUpperCase(),
+                style: AppStyles.bold20Text.copyWith(
+                  color: AppColors.whiteColor,
+                ),
               ),
             ),
             const SizedBox(width: 14),
@@ -41,7 +43,7 @@ class CustomerProfileHeaderCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    customer.name,
+                    customer.name!,
                     style: AppStyles.bold20Text,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

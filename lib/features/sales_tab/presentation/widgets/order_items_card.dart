@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
 import 'package:twos_home_wear_app/core/utils/app_styles.dart';
-import 'package:twos_home_wear_app/features/sales_tab/presentation/models/order_item_model.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/order_details_entity.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order_item_tile.dart';
 
 class OrderItemsCard extends StatelessWidget {
   const OrderItemsCard({super.key, required this.items});
 
-  final List<OrderItemModel> items;
+  final List<OrderDetailsEntity> items;
 
   @override
   Widget build(BuildContext context) {
