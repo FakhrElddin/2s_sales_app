@@ -31,4 +31,40 @@ class CustomersLocalDataSourceImpl implements CustomersLocalDataSource {
     await box.put('customersList', customers);
     await box.close();
   }
+
+  @override
+  Future<Either<Failures, bool>> updatePhoneLocal({
+    required int customerId,
+    required String phone,
+  }) async {
+    try {
+      var box = await Hive.openBox('customers');
+      var customersList = box.get('customersList');
+      if (customersList != null) {
+        var customers = (customersList as List).cast<CustomerEntity>();
+        final index = customers.indexWhere((c) => c.id == customerId);
+        if (index != -1) {
+          final old = customers[index];
+          customers[index] = CustomerEntity(
+            id: old.id,
+            name: old.name,
+            phone: phone,
+            email: old.email,
+            city: old.city,
+            street: old.street,
+          );
+          await box.put('customersList', customers);
+        }
+      }
+      var pendingBox = await Hive.openBox('pending_phone_updates');
+      await pendingBox.put(customerId, phone);
+      return const Right(true);
+    } catch (e) {
+      return Left(
+        UnexpectedError(
+          errorMessage: 'Failed to update phone locally: ${e.toString()}',
+        ),
+      );
+    }
+  }
 }

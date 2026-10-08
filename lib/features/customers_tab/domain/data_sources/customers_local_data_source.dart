@@ -5,4 +5,8 @@ import 'package:twos_home_wear_app/features/customers_tab/domain/entities/custom
 abstract class CustomersLocalDataSource {
   Future<void> saveCustomers({required List<CustomerEntity> customers});
   Future<Either<Failures, List<CustomerEntity>>> getCachedCustomers();
+  Future<Either<Failures, bool>> updatePhoneLocal({
+    required int customerId,
+    required String phone,
+  });
 }

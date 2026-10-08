@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:twos_home_wear_app/core/errors/failures.dart';
 import 'package:twos_home_wear_app/features/customers_tab/domain/data_sources/customers_local_data_source.dart';
@@ -19,6 +20,7 @@ class CustomersRepoImpl implements CustomersRepo {
   Future<Either<Failures, List<CustomerEntity>>> getCustomers({
     String? search,
   }) async {
+    await _syncPendingUpdates();
     var either = await customersRemoteDataSoucre.getCustomers(search: search);
     return either.fold(
       (failure) async {
@@ -57,8 +59,42 @@ class CustomersRepoImpl implements CustomersRepo {
       phone: phone,
     );
     return either.fold(
-      (failure) => Left(failure),
-      (isUpdated) => Right(isUpdated),
+      (failure) async {
+        var localEither = await customersLocalDataSource.updatePhoneLocal(
+          customerId: customerId,
+          phone: phone,
+        );
+        return localEither.fold(
+          (localFailure) => Left(localFailure),
+          (isLocalUpdated) => Right(isLocalUpdated),
+        );
+      },
+      (isUpdated) async {
+        await customersLocalDataSource.updatePhoneLocal(
+          customerId: customerId,
+          phone: phone,
+        );
+        return Right(isUpdated);
+      },
     );
+  }
+
+  Future<void> _syncPendingUpdates() async {
+    try {
+      var pendingBox = await Hive.openBox('pending_phone_updates');
+      if (pendingBox.isEmpty) return;
+      final updates = Map<dynamic, dynamic>.from(pendingBox.toMap());
+      for (var entry in updates.entries) {
+        final int customerId = entry.key as int;
+        final String phone = entry.value as String;
+        var result = await customersRemoteDataSoucre.updateCustomerPhone(
+          customerId: customerId,
+          phone: phone,
+        );
+        result.fold((failure) {}, (isSynced) async {
+          await pendingBox.delete(customerId);
+        });
+      }
+    } catch (_) {}
   }
 }
