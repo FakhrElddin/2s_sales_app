@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twos_home_wear_app/core/di/di.dart';
 import 'package:twos_home_wear_app/core/utils/app_colors.dart';
+import 'package:twos_home_wear_app/core/widgets/custom_app_dialog.dart';
 import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/manager/order_details_cubit/order_details_cubit.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/widgets/order_confirm_bottom_bar.dart';
@@ -47,10 +48,19 @@ class OrderDetailsScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         child: Column(
                           children: [
-                            OrderCustomerCard(
-                              customerName: order.customerName,
-                              date: order.date,
-                              status: order.status,
+                            BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+                              buildWhen: (previous, current) {
+                                return current is ConfirmOrderSuccess;
+                              },
+                              builder: (context, state) {
+                                return OrderCustomerCard(
+                                  customerName: order.customerName,
+                                  date: order.date,
+                                  status: state is ConfirmOrderSuccess
+                                      ? 'sale'
+                                      : order.status,
+                                );
+                              },
                             ),
                             const SizedBox(height: 12),
                             OrderItemsCard(items: state.orderDetails),
@@ -79,25 +89,32 @@ class OrderDetailsScreen extends StatelessWidget {
         bottomNavigationBar: BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
           listener: (context, state) {
             if (state is ConfirmOrderSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Order confirmed successfully!'),
-                  backgroundColor: Colors.green,
-                ),
+              CustomAppDialog.showSuccess(
+                context: context,
+                title: 'Success',
+                description: 'Order confirmed successfully!',
               );
             } else if (state is ConfirmOrderError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.failure.errorMessage),
-                  backgroundColor: Colors.red,
-                ),
+              CustomAppDialog.showError(
+                context: context,
+                title: 'Error',
+                description: state.failure.errorMessage,
               );
             }
           },
           builder: (context, state) {
             if (state is ConfirmOrderLoading) {
-              return Center(
-                child: CircularProgressIndicator(color: AppColors.primaryColor),
+              return SafeArea(
+                top: false,
+                bottom: true,
+                child: SizedBox(
+                  height: 70,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
               );
             } else {
               if (state is ConfirmOrderSuccess || order.status != 'draft') {

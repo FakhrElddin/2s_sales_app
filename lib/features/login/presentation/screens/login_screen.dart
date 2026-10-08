@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         } else if (state is LoginError) {
                           CustomAppDialog.showError(
                             context: context,
-                            title: 'Error',
+                            title: 'Login Failed',
                             description: state.failures.errorMessage,
                           );
                         }
