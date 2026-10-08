@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// dart format width=80
 
 // **************************************************************************
 // InjectableConfigGenerator
@@ -57,88 +56,56 @@ import '../../features/sales_tab/presentation/manager/sales_orders_cubit/sales_o
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
-    gh.factory<_i362.LoginRemoteDataSource>(
-      () =>
-          _i321.LoginRemoteDataSourceImpl(apiManager: gh<_i1047.ApiManager>()),
-    );
-    gh.factory<_i128.CustomersRemoteDataSoucre>(
-      () => _i194.CustomersRemoteDataSourceImpl(
-        apiManager: gh<_i1047.ApiManager>(),
-      ),
-    );
-    gh.factory<_i586.SalesOrdersRemoteDataSource>(
-      () => _i520.SalesOrdersRemoteDataSourceImpl(
-        apiManager: gh<_i1047.ApiManager>(),
-      ),
-    );
-    gh.factory<_i1061.LoginRepo>(
-      () => _i546.LoginRepoImpl(
-        loginRemoteDataSource: gh<_i362.LoginRemoteDataSource>(),
-      ),
-    );
-    gh.factory<_i1020.CustomersRepo>(
-      () => _i822.CustomersRepoImpl(
-        customersRemoteDataSoucre: gh<_i128.CustomersRemoteDataSoucre>(),
-      ),
-    );
-    gh.factory<_i604.SalesOrdersRepo>(
-      () => _i146.SalesOrdersRepoImpl(
-        salesOrdersRemoteDataSource: gh<_i586.SalesOrdersRemoteDataSource>(),
-      ),
-    );
+    gh.factory<_i362.LoginRemoteDataSource>(() =>
+        _i321.LoginRemoteDataSourceImpl(apiManager: gh<_i1047.ApiManager>()));
+    gh.factory<_i128.CustomersRemoteDataSoucre>(() =>
+        _i194.CustomersRemoteDataSourceImpl(
+            apiManager: gh<_i1047.ApiManager>()));
+    gh.factory<_i1061.LoginRepo>(() => _i546.LoginRepoImpl(
+        loginRemoteDataSource: gh<_i362.LoginRemoteDataSource>()));
+    gh.factory<_i586.SalesOrdersRemoteDataSource>(() =>
+        _i520.SalesOrdersRemoteDataSourceImpl(
+            apiManager: gh<_i1047.ApiManager>()));
+    gh.factory<_i1020.CustomersRepo>(() => _i822.CustomersRepoImpl(
+        customersRemoteDataSoucre: gh<_i128.CustomersRemoteDataSoucre>()));
+    gh.factory<_i604.SalesOrdersRepo>(() => _i146.SalesOrdersRepoImpl(
+        salesOrdersRemoteDataSource: gh<_i586.SalesOrdersRemoteDataSource>()));
     gh.factory<_i191.LoginUseCase>(
-      () => _i191.LoginUseCase(loginRepo: gh<_i1061.LoginRepo>()),
-    );
-    gh.factory<_i498.ConfirmOrderUseCase>(
-      () => _i498.ConfirmOrderUseCase(
-        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
-      ),
-    );
-    gh.factory<_i794.GetOrderDetailsUseCase>(
-      () => _i794.GetOrderDetailsUseCase(
-        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
-      ),
-    );
-    gh.factory<_i600.GetSalesOrdersUseCase>(
-      () => _i600.GetSalesOrdersUseCase(
-        salesOrdersRepo: gh<_i604.SalesOrdersRepo>(),
-      ),
-    );
+        () => _i191.LoginUseCase(loginRepo: gh<_i1061.LoginRepo>()));
     gh.factory<_i994.LoginCubit>(
-      () => _i994.LoginCubit(loginUseCase: gh<_i191.LoginUseCase>()),
-    );
-    gh.factory<_i10.GetCustomersUseCase>(
-      () => _i10.GetCustomersUseCase(customersRepo: gh<_i1020.CustomersRepo>()),
-    );
-    gh.factory<_i545.UpdateCustomerPhoneUseCase>(
-      () => _i545.UpdateCustomerPhoneUseCase(
-        customersRepo: gh<_i1020.CustomersRepo>(),
-      ),
-    );
-    gh.factory<_i307.SalesOrdersCubit>(
-      () => _i307.SalesOrdersCubit(
-        getSalesOrdersUseCase: gh<_i600.GetSalesOrdersUseCase>(),
-      ),
-    );
-    gh.factory<_i637.OrderDetailsCubit>(
-      () => _i637.OrderDetailsCubit(
-        getOrderDetailsUseCase: gh<_i794.GetOrderDetailsUseCase>(),
-        confirmOrderUseCase: gh<_i498.ConfirmOrderUseCase>(),
-      ),
-    );
-    gh.factory<_i227.CustomersCubit>(
-      () => _i227.CustomersCubit(
-        getCustomersUseCase: gh<_i10.GetCustomersUseCase>(),
-        updateCustomerPhoneUseCase: gh<_i545.UpdateCustomerPhoneUseCase>(),
-      ),
-    );
+        () => _i994.LoginCubit(loginUseCase: gh<_i191.LoginUseCase>()));
+    gh.factory<_i10.GetCustomersUseCase>(() =>
+        _i10.GetCustomersUseCase(customersRepo: gh<_i1020.CustomersRepo>()));
+    gh.factory<_i545.UpdateCustomerPhoneUseCase>(() =>
+        _i545.UpdateCustomerPhoneUseCase(
+            customersRepo: gh<_i1020.CustomersRepo>()));
+    gh.factory<_i498.ConfirmOrderUseCase>(() => _i498.ConfirmOrderUseCase(
+        salesOrdersRepo: gh<_i604.SalesOrdersRepo>()));
+    gh.factory<_i794.GetOrderDetailsUseCase>(() => _i794.GetOrderDetailsUseCase(
+        salesOrdersRepo: gh<_i604.SalesOrdersRepo>()));
+    gh.factory<_i600.GetSalesOrdersUseCase>(() => _i600.GetSalesOrdersUseCase(
+        salesOrdersRepo: gh<_i604.SalesOrdersRepo>()));
+    gh.factory<_i307.SalesOrdersCubit>(() => _i307.SalesOrdersCubit(
+        getSalesOrdersUseCase: gh<_i600.GetSalesOrdersUseCase>()));
+    gh.factory<_i637.OrderDetailsCubit>(() => _i637.OrderDetailsCubit(
+          getOrderDetailsUseCase: gh<_i794.GetOrderDetailsUseCase>(),
+          confirmOrderUseCase: gh<_i498.ConfirmOrderUseCase>(),
+        ));
+    gh.factory<_i227.CustomersCubit>(() => _i227.CustomersCubit(
+          getCustomersUseCase: gh<_i10.GetCustomersUseCase>(),
+          updateCustomerPhoneUseCase: gh<_i545.UpdateCustomerPhoneUseCase>(),
+        ));
     return this;
   }
 }
