@@ -22,6 +22,11 @@ class OrderDetailsScreen extends StatelessWidget {
           getIt<OrderDetailsCubit>()..getOrderDetails(orderId: order.id),
       child: Scaffold(
         body: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+          buildWhen: (previous, current) {
+            return current is OrderDetailsLoading ||
+                current is OrderDetailsSuccess ||
+                current is OrderDetailsError;
+          },
           builder: (context, state) {
             if (state is OrderDetailsSuccess) {
               double subtotal = 0;
@@ -71,7 +76,43 @@ class OrderDetailsScreen extends StatelessWidget {
             }
           },
         ),
-        bottomNavigationBar: OrderConfirmBottomBar(onConfirm: () {}),
+        bottomNavigationBar: BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
+          listener: (context, state) {
+            if (state is ConfirmOrderSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Order confirmed successfully!'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            } else if (state is ConfirmOrderError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.failure.errorMessage),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is ConfirmOrderLoading) {
+              return Center(
+                child: CircularProgressIndicator(color: AppColors.primaryColor),
+              );
+            } else {
+              if (state is ConfirmOrderSuccess || order.status != 'draft') {
+                return SizedBox.shrink();
+              } else {
+                return OrderConfirmBottomBar(
+                  onConfirm: () {
+                    BlocProvider.of<OrderDetailsCubit>(context)
+                        .confirmOrder(orderId: order.id);
+                  },
+                );
+              }
+            }
+          },
+        ),
       ),
     );
   }

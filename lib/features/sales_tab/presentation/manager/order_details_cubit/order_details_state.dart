@@ -18,3 +18,12 @@ final class OrderDetailsError extends OrderDetailsState {
 
   OrderDetailsError({required this.failure});
 }
+
+class ConfirmOrderLoading extends OrderDetailsState {}
+
+class ConfirmOrderSuccess extends OrderDetailsState {}
+
+class ConfirmOrderError extends OrderDetailsState {
+  final Failures failure;
+  ConfirmOrderError({required this.failure});
+}
