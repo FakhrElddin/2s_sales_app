@@ -10,6 +10,8 @@ import 'package:twos_home_wear_app/features/customers_tab/domain/entities/custom
 import 'package:twos_home_wear_app/features/customers_tab/presentation/screens/customer_details_screen.dart';
 import 'package:twos_home_wear_app/features/home/presentation/screens/home_screen.dart';
 import 'package:twos_home_wear_app/features/login/presentation/screens/login_screen.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/order_details_entity.dart';
+import 'package:twos_home_wear_app/features/sales_tab/domain/entities/sale_order_entity.dart';
 import 'package:twos_home_wear_app/features/sales_tab/presentation/screens/order_details_screen.dart';
 
 void main() async {
@@ -19,6 +21,8 @@ void main() async {
   Hive.init(directory.path);
   await Hive.initFlutter();
   Hive.registerAdapter(CustomerEntityAdapter());
+  Hive.registerAdapter(SaleOrderEntityAdapter());
+  Hive.registerAdapter(OrderDetailsEntityAdapter());
   configureDependencies();
 
   String? sessionId = SharedPrefsUtils.getData(key: 'session_id') as String?;

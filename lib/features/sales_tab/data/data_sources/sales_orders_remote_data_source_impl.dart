@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:twos_home_wear_app/core/api/api_manager.dart';
 import 'package:twos_home_wear_app/core/api/end_points.dart';
 import 'package:twos_home_wear_app/core/errors/failures.dart';
+import 'package:twos_home_wear_app/core/utils/internet_checker.dart';
 import 'package:twos_home_wear_app/features/sales_tab/data/models/order_details_model.dart';
 import 'package:twos_home_wear_app/features/sales_tab/data/models/sale_order_model.dart';
 import 'package:twos_home_wear_app/features/sales_tab/domain/data_sources/sales_orders_remote_data_source.dart';
@@ -19,6 +20,9 @@ class SalesOrdersRemoteDataSourceImpl implements SalesOrdersRemoteDataSource {
   @override
   Future<Either<Failures, List<SaleOrderEntity>>> getSalesOrders() async {
     try {
+      if (!await InternetChecker.hasInternet()) {
+        return Left(NetworkError());
+      }
       var response = await apiManager.postData(
         endPoint: EndPoints.callKwEndPoint,
         data: {
@@ -80,6 +84,9 @@ class SalesOrdersRemoteDataSourceImpl implements SalesOrdersRemoteDataSource {
     required int orderId,
   }) async {
     try {
+      if (!await InternetChecker.hasInternet()) {
+        return Left(NetworkError());
+      }
       var response = await apiManager.postData(
         endPoint: EndPoints.callKwEndPoint,
         data: {
@@ -144,6 +151,9 @@ class SalesOrdersRemoteDataSourceImpl implements SalesOrdersRemoteDataSource {
   @override
   Future<Either<Failures, bool>> confirmOrder({required int orderId}) async {
     try {
+      if (!await InternetChecker.hasInternet()) {
+        return Left(NetworkError());
+      }
       var response = await apiManager.postData(
         endPoint: EndPoints.callKwEndPoint,
         data: {

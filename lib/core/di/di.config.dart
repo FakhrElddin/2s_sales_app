@@ -39,10 +39,14 @@ import '../../features/login/domain/repositories/login_repo.dart' as _i1061;
 import '../../features/login/domain/use_cases/login_use_case.dart' as _i191;
 import '../../features/login/presentation/manager/login_cubit/login_cubit.dart'
     as _i994;
+import '../../features/sales_tab/data/data_sources/sales_local_data_source_impl.dart'
+    as _i234;
 import '../../features/sales_tab/data/data_sources/sales_orders_remote_data_source_impl.dart'
     as _i520;
 import '../../features/sales_tab/data/repositories/sales_orders_repo_impl.dart'
     as _i146;
+import '../../features/sales_tab/domain/data_sources/sales_local_data_source.dart'
+    as _i243;
 import '../../features/sales_tab/domain/data_sources/sales_orders_remote_data_source.dart'
     as _i586;
 import '../../features/sales_tab/domain/repositories/sales_orders_repo.dart'
@@ -87,10 +91,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i586.SalesOrdersRemoteDataSource>(() =>
         _i520.SalesOrdersRemoteDataSourceImpl(
             apiManager: gh<_i1047.ApiManager>()));
-    gh.factory<_i604.SalesOrdersRepo>(() => _i146.SalesOrdersRepoImpl(
-        salesOrdersRemoteDataSource: gh<_i586.SalesOrdersRemoteDataSource>()));
+    gh.factory<_i243.SalesLocalDataSource>(
+        () => _i234.SalesLocalDataSourceImpl());
     gh.factory<_i191.LoginUseCase>(
         () => _i191.LoginUseCase(loginRepo: gh<_i1061.LoginRepo>()));
+    gh.factory<_i604.SalesOrdersRepo>(() => _i146.SalesOrdersRepoImpl(
+          salesOrdersRemoteDataSource: gh<_i586.SalesOrdersRemoteDataSource>(),
+          salesLocalDataSource: gh<_i243.SalesLocalDataSource>(),
+        ));
     gh.factory<_i994.LoginCubit>(
         () => _i994.LoginCubit(loginUseCase: gh<_i191.LoginUseCase>()));
     gh.factory<_i10.GetCustomersUseCase>(() =>
